@@ -1,0 +1,15 @@
+.home-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .playlist-card {
+    margin: 10px;
+    width: 200px;
+  }
+  
+  .spacer {
+    flex: 1 1 auto;
+  }
+  

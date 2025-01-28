@@ -1,0 +1,126 @@
+.song-info-card {
+    padding: 20px;
+    background-color: #121212;
+    color: white;
+    min-height: fit-content;
+    padding-bottom: 25px;
+  }
+
+  button.moreoption {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    margin-left: 93%;
+    background-color: rgba(240, 248, 255, 0.238);
+    color: white;
+  }
+  
+  button.moreoption mat-icon {
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .song-image {
+    width: 350px;
+    height: 350px;
+    margin-left: 570px;
+    border-radius: 5px;
+    margin-right: 10px;
+  }
+  
+  .song-details {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .song-details h3 {
+    font-size: 25px;
+  }
+
+  .song-details p {
+    margin-top: 5px;
+  }
+  
+  mat-slider {
+    margin-left: 25px;
+    width: 93%;
+    margin-top: 10px;
+  }
+  
+  mat-toolbar {
+    margin-left: 638px;
+    margin-top: -10px;
+    width: fit-content;
+    /* margin-top: 10px; */
+    background-color: transparent;
+  }
+
+  mat-toolbar button {
+    color: white;
+  }
+
+  mat-toolbar mat-icon {
+    font-size: 27px;
+  }
+
+  mat-toolbar .pause {
+    margin-left: 22px;
+    margin-right: 30px;
+    margin-top: -10px;
+  }
+
+  mat-toolbar .pause mat-icon {
+    font-size: 40px;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 18px;
+    background-color: rgba(240, 248, 255, 0.238);
+  }
+
+  mat-toolbar .volume {
+    margin-left: 20px;
+  }
+  
+  .spacer {
+    flex: 1;
+  }
+
+  .hover-time {
+    position: fixed;
+    margin-top: 31%;
+  }
+
+  .time-info {
+    margin-left: 30px;
+    margin-top: 5px;
+    font-size: 18px;
+  }
+
+  button.shuffle {
+    margin-left: 100%;
+    margin-right: 20px;
+  }
+
+
+  button.zoom-out-button {
+    position: fixed;
+  bottom: 20px;
+  right: 40px;
+  background-color: #121212;
+  color: white;
+  border-radius: 50%;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 20;
+  }
+
+  .zoom-out-button mat-icon {
+    font-size: 30px;
+  }
+  
+  

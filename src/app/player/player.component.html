@@ -1,0 +1,78 @@
+
+<button mat-icon-button (click)="goToHome()" class="back-button">
+  <mat-icon>arrow_back</mat-icon>
+</button>
+
+<mat-card class="song-info-card">
+
+  <button mat-icon-button class="moreoption" [matMenuTriggerFor]="menu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="addToPlaylist()">
+      <mat-icon>playlist_add</mat-icon> Add to Playlist
+    </button>
+    <button mat-menu-item (click)="addToLike()">
+      <mat-icon>thumb_up_alt</mat-icon> Add to liked songs
+    </button>
+    <button mat-menu-item (click)="shareSong()">
+      <mat-icon>share</mat-icon> Share
+    </button>
+  </mat-menu>
+
+  <img mat-card-image [src]="currentSong?.imageUrl" alt="{{ currentSong?.name }} image" class="song-image" />
+  <div class="song-details">
+    <h3>{{ currentSong?.name }}</h3>
+    <p>{{ currentSong?.artist }} - {{ currentSong?.year }}</p>
+  </div>
+
+  <mat-slider 
+    min="0" 
+    [max]="duration" 
+    step="1" 
+    (change)="onSliderChange($event)"
+    (mouseover)="onSliderHover($event)"
+    (mouseout)="onSliderLeave()"
+  >
+    <input matSliderThumb [value]="currentTime">
+  </mat-slider>
+  <div *ngIf="isHovering" class="hover-time" [style.left.px]="hoverTimePosition">
+    {{ getHoveredTime() }}
+  </div>
+
+  <div class="time-info">
+    <span>{{ getCurrentTime() }}</span> / <span>{{ getFormattedTime(duration) }}</span>
+  </div>
+
+  
+  <!-- Controls -->
+  <mat-toolbar class="operating" color="primary">
+    <button mat-icon-button (click)="skipPrevious()">
+      <mat-icon>skip_previous</mat-icon>
+    </button>
+    <button mat-icon-button class="pause" (click)="playPause()">
+      <mat-icon>{{ isPlaying ? 'pause' : 'play_arrow' }}</mat-icon>
+    </button>
+    <button mat-icon-button (click)="skipNext()">
+      <mat-icon>skip_next</mat-icon>
+    </button> 
+
+    <button mat-icon-button class="volume" (click)="toggleMute()" >
+      <mat-icon>{{ isMuted ? 'volume_off' : 'volume_up' }}</mat-icon>
+    </button>
+
+    <button mat-icon-button class="shuffle" (click)="shuffle()" [ngStyle]="{'color': getShuffleIconColor()}">
+      <mat-icon>shuffle</mat-icon>
+    </button>
+    
+    <button mat-icon-button class="repeat" (click)="repeat()">
+      <mat-icon>{{ isRepeat ? 'repeat_one' : 'repeat' }}</mat-icon>
+    </button>
+    
+    <button mat-icon-button class="zoom-out-button" (click)="goToHomeBar()">
+      <mat-icon>fullscreen_exit</mat-icon>
+    </button>
+  </mat-toolbar>
+    
+</mat-card>

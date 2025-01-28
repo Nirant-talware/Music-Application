@@ -1,0 +1,128 @@
+<button mat-icon-button (click)="goToHome()" class="back-button">
+  <mat-icon>arrow_back</mat-icon>
+</button>
+<mat-card class="playlist-details">
+  <div class="image-container">
+  
+    <mat-card-header class="playlist-header">
+      <mat-card-title>{{ playlist?.name }}</mat-card-title>
+    </mat-card-header>
+
+    
+    <button mat-icon-button class="savelater" (click)="saveForLater()">
+      <mat-icon>queue</mat-icon>
+    </button>
+    <button mat-icon-button class="pausehead" (click)="playPause()">
+      <mat-icon>{{ isPlaying ? "pause" : "play_arrow" }}</mat-icon>
+    </button>
+    <button mat-icon-button class="moreoption" [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="playNextSong()">
+        <mat-icon>play_arrow</mat-icon> Play Next
+      </button>
+      <button mat-menu-item (click)="saveToPlaylist()">
+        <mat-icon>library_add</mat-icon> Save Playlist to Library
+      </button>
+      <button mat-menu-item (click)="shareSong()">
+        <mat-icon>share</mat-icon> Share
+      </button>
+    </mat-menu>
+    
+
+    <div class="image">
+      <img
+        mat-card-image
+        [src]="playlist.imageUrl"
+        alt="{{ playlist.name }} image"
+      />
+    </div>
+  </div>
+  <br><br><br>
+  <hr>
+
+  <!-- Songs Heading -->
+  <mat-card-header class="songs-header">
+    <mat-card-title>Songs</mat-card-title>
+  </mat-card-header>
+
+  <!-- Songs List -->
+  <mat-list>
+    <mat-list-item *ngFor="let song of playlist?.songs">
+      <img class="song-img" mat-card-image [src]="song.imageUrl" />
+      <span class="song-name" (click)="goToPlayerWithSong(song)">{{
+        song.name
+      }}</span
+      ><br />
+      <span class="song-artist">{{ song.artist }}</span
+      ><br />
+      <span class="song-year">{{ song.year }}</span>
+      <span class="spacer"></span>
+      <button mat-icon-button (click)="playSong(song)" aria-label="Play song">
+        <mat-icon>play_arrow</mat-icon>
+      </button>
+    </mat-list-item>
+  </mat-list>
+
+  <div *ngIf="currentSong" class="song-info-bar">
+    <img
+      [src]="currentSong.imageUrl"
+      (click)="goToPlayer()"
+      alt=" {{ currentSong.name }} image"
+      class="song-image"
+    />
+    <div class="song-details">
+      <h3 (click)="goToPlayer()">{{ currentSong.name }}</h3>
+      <p>{{ currentSong.artist }} - {{ currentSong.year }}</p>
+    </div>
+
+    <mat-slider
+      min="1"
+      [max]="duration"
+      step="0.5"
+      [(ngModel)]="currentTime"
+      (change)="onSliderChange($event)"
+      (mouseover)="onSliderHover($event)"
+      (mouseout)="onSliderLeave()"
+    >
+      <input matSliderThumb value="1.5" />
+    </mat-slider>
+
+    <div
+      *ngIf="isHovering"
+      class="hover-time"
+      [style.left.px]="hoverTimePosition"
+    >
+      {{ getHoveredTime() }}
+    </div>
+
+    <div class="time-info">
+      <span>{{ getCurrentTime() }}</span> /
+      <span>{{ getFormattedTime(duration) }}</span>
+    </div>
+
+    <mat-toolbar color="primary">
+      <button mat-icon-button (click)="skipPrevious()">
+        <mat-icon>skip_previous</mat-icon>
+      </button>
+      <button mat-icon-button class="pause" (click)="playPause()">
+        <mat-icon>{{ isPlaying ? "pause" : "play_arrow" }}</mat-icon>
+      </button>
+      <button mat-icon-button (click)="skipNext()">
+        <mat-icon>skip_next</mat-icon>
+      </button>
+      <span class="spacer"></span>
+      <button mat-icon-button class="volume" (click)="toggleMute()">
+        <mat-icon>{{ isMuted ? "volume_off" : "volume_up" }}</mat-icon>
+      </button>
+      <button mat-icon-button class="close-btn" (click)="closeInfoBar()">
+        <mat-icon>cancel</mat-icon>
+      </button>
+      <button mat-icon-button class="zoom-button" (click)="goToPlayer()">
+        <mat-icon>fullscreen</mat-icon>
+      </button>
+    </mat-toolbar>
+  </div>
+</mat-card>

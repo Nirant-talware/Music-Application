@@ -1,0 +1,416 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  /* background-color: #bd0e0e; */
+  color: #fff;
+}
+
+/* Navbar */
+.appname {
+  background-color: #274753e0;
+  color: white;
+  padding: 10px 20px;
+}
+
+mat-toolbar .navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+mat-toolbar .navbar span {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+mat-toolbar .navbar .spacer {
+  flex-grow: 1;
+}
+
+mat-toolbar .navbar i {
+  margin-right: 8px;
+  font-size: 28px; 
+  color: white;
+}
+
+mat-toolbar + mat-toolbar {
+  background-color: #274753e0;
+  padding: 10px 20px;
+}
+
+mat-toolbar button.player:hover {
+  background-color: #39697ae0;
+}
+
+button.listmenu {
+  margin-top: 70px;
+  margin-left: 10px;;
+}
+
+button.listmenu mat-icon {
+  margin-top: -15px;
+  font-size: 32px;
+}
+
+/* Sidebar styles */
+.sidebar {
+  position: absolute;
+  top: 62px;
+  left: -250px;  /* Hidden initially */
+  width: 250px;
+  height: 100%;
+  background-color: #484747;
+  color: white;
+  transition: left 0.3s ease;  /* Smooth transition */
+  padding-top: 60px; /* To account for the toolbar height */
+  z-index: 1000;  /* Make sure it's above other content */
+}
+
+.sidebar.open {
+  left: 0;  /* Show the sidebar */
+  opacity: 0.9;
+}
+
+.sidebar button {
+  color: white;
+  background: none;
+  border: none;
+  width: 100%;
+  padding: 15px;
+  text-align: left;
+}
+
+.sidebar button:hover {
+  background-color: #341a1a;
+}
+
+/* Your existing styles for the home page content */
+.home-container {
+  margin-left: 0;
+  transition: margin-left 0.3s ease;
+}
+
+.sidebar.open ~ .home-container {
+  margin-left: 250px;  /* Shift content when sidebar is open */
+}
+
+.listmenu {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1200;  /* Keep the icon above the content */
+}
+
+.content {
+  z-index: 1;
+  /* margin-top: -50px; */
+}
+
+/* Search */
+.search-bar {
+  margin-left: 35%;
+  margin-top: 10px;
+  margin-bottom: -10px;
+  width: 30%;
+  border-radius: 20px;
+}
+
+.search-bar input {
+  font-size: 16px;
+}
+
+button.player {
+  margin-left: 440px;
+}
+
+/* Headers */
+mat-card-header.title {
+  background-color: #2d2323;
+}
+
+/* Songs List */
+mat-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 40px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+mat-list-item {
+  display: flex;
+  margin: 20px;
+  min-height: 100px;
+  position: relative;
+  width: calc(30% - 20px);
+}
+
+mat-list-item .song-name {
+  display: flex;
+  position: absolute;
+  margin-left: 150px;
+  margin-top: -20px;
+  font-size: 20px;
+  font-weight: 450;
+  cursor: pointer;
+}
+
+mat-list-item .song-artist {
+  display: flex;
+  position: absolute;
+  margin-top: -13px;
+  margin-left: 150px;
+}
+
+mat-list-item .song-year {
+  display: flex;
+  position: absolute;
+  margin-left: 150px;
+  margin-top: -10px;
+}
+
+mat-list-item img {
+  display: flex;
+  position: absolute;
+  margin-top: -25px;
+  object-fit: cover;
+  width: 100px;
+  height: 100px;
+  transition: all 0.3s ease;
+}
+
+mat-list-item:last-child {
+  border-bottom: none;
+}
+
+mat-list-item button {
+  position: absolute;
+  bottom: 25px;
+  left: 40px;
+  display: none; 
+  font-size: 40px;
+  color: white; 
+}
+
+mat-list-item button mat-icon {
+  font-size: 30px;
+  bottom: 3px;
+  right: 3px;
+}
+
+mat-list-item:hover button {
+  display: flex;
+}
+
+mat-list-item:hover img {
+  opacity: 0.7; 
+}
+
+/* Home Container */
+.home-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 50px;
+  padding: 50px;
+  justify-items: center;
+  background-color: #1e3741e0;
+}
+
+/* Playlist Card Styles */
+.playlist-card {
+  background-color: #121212;
+  width: 100%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column; 
+  height: 100%;
+}
+
+.playlist-card:hover {
+  transform: translateY(-10px);
+}
+
+mat-card-header {
+  /* margin-top: 5px; */
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  background-color: #1e1e1e;
+  padding: 16px;
+}
+
+mat-card-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+}
+
+/* Image inside card */
+mat-card-image {
+  width: 100%;
+  min-height: 200px;
+  object-fit: contain;
+  border-radius: 0 0 8px 8px;
+  flex-grow: 0;
+}
+
+/* Mat-card actions buttons */
+mat-card-actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; 
+  margin-top: auto; 
+  padding: 16px;
+}
+
+mat-card-actions button {
+  background-color: #1db954; 
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 4px;
+  padding: 8px 16px;
+  transition: background-color 0.3s;
+  border: none;
+}
+
+mat-card-actions button:hover {
+  background-color: #1ed760; 
+}
+
+/* Button hover effects */
+button.mat-button {
+  transition: color 0.3s ease;
+}
+
+button.mat-button:hover {
+  color: #1db954; 
+}
+
+/* Song Bar */
+.song-info-bar {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  background-color: #121212;
+  color: white;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 180px;
+  z-index: 10;
+  justify-content: space-between;
+  opacity: 0.9;
+}
+
+.song-info-bar .song-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 5px;
+  margin-right: 40px;
+  cursor: pointer;
+}
+
+.song-info-bar .song-details {
+  margin-top: -80px;
+  min-width: fit-content;
+  /* min-height: fit-content; */
+}
+
+mat-slider {
+  /* height: fit-content; */
+  width: 73%; 
+  margin-top: 60px;
+  margin-left: 185px;
+  /* margin-left: -180px; */
+  position: fixed;
+  display: block;
+  z-index: 10;
+}
+
+.song-info-bar h3 {
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+.operating {
+  width: fit-content;
+  margin-left: auto;
+  margin-top: -75px;
+  margin-right: 50px;
+  background-color: transparent;
+}
+
+.operating button {
+  color: white;
+}
+
+.operating mat-icon {
+  font-size: 28px;
+}
+
+.volume {
+  margin-left: 20px;
+}
+
+.close-btn {
+  position: absolute;
+  top: -2px;
+  right: 5px;
+}
+
+.close-btn mat-icon {
+  font-size: 26px;
+}
+
+
+.zoom-button {
+  position: fixed;
+  bottom: 10px;
+  right: 20px;
+  background-color: #121212;
+  color: white;
+  border-radius: 50%;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 20;
+}
+
+.hover-time {
+  position: fixed;
+  margin-top: 20px;
+  margin-left: 11%;
+  width: fit-content;
+}
+
+.time-info {
+  min-width: fit-content;
+  margin-top: 120px;
+  font-size: 16px;
+  margin-left: 79%;
+  position: fixed;
+}
+
+mat-toolbar.operating .pause {
+  margin-right: 30px;
+  margin-left: 2px;
+  margin-top: -33px;
+}
+
+mat-toolbar.operating .pause mat-icon {
+  position: fixed;
+  font-size: 35px;
+  width: fit-content;
+  height: fit-content;
+  border-radius: 18px;
+  background-color: rgba(240, 248, 255, 0.238);
+}
+

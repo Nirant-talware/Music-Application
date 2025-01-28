@@ -1,0 +1,143 @@
+<!-- Navigation Bar -->
+<mat-toolbar class="appname" color="primary">
+  <div class="navbar">
+    <span><i class="fas fa-music"></i> Music App</span>
+  </div>
+</mat-toolbar>
+
+<!-- <button mat-button (click)="loadLocalSongs()">Load Local Songs</button> -->
+
+
+
+<!-- Menu -->
+<button mat-icon-button class="listmenu" (click)="toggleMenu()">
+  <mat-icon>menu</mat-icon>
+</button>
+
+<!-- Sidebar Menu (Initially hidden) -->
+<div class="sidebar" [class.open]="isMenuOpen">
+  <button mat-button (click)="scrollToPlaylist()">Playlist</button>
+</div>
+
+<!-- Search -->
+<mat-form-field class="search-bar" appearance="outline">
+  <mat-icon matPrefix class="search-icon">search</mat-icon>
+  <input
+    matInput
+    placeholder="Search Songs, Albums, Artist, Podcasts"
+    [(ngModel)]="searchTerm"
+    (input)="searchProducts()"
+    class="search-input"
+  />
+</mat-form-field>
+
+<button class="player" mat-button (click)="goToPlayer($event)">Player</button>
+
+<!-- Songs List -->
+<mat-card-header class="title">
+  <mat-card-title>Recommended</mat-card-title>
+</mat-card-header>
+
+<div class="songs-list">
+  <mat-list>
+    <mat-list-item *ngFor="let song of filteredSongs">
+      <img class="song-img" mat-card-image [src]="song.imageUrl" />
+      <span class="song-name" (click)="goToPlayerWithSong(song)">{{
+        song.name
+      }}</span
+      ><br />
+      <span class="song-artist">{{ song.artist }}</span
+      ><br />
+      <span class="song-year">{{ song.year }}</span>
+      <span class="spacer"></span>
+      <button mat-icon-button (click)="playSong(song)" aria-label="Play song">
+        <mat-icon>play_arrow</mat-icon>
+      </button>
+    </mat-list-item>
+  </mat-list>
+</div>
+
+<div *ngIf="currentSong" class="song-info-bar">
+  <img
+    [src]="currentSong.imageUrl"
+    (click)="goToPlayer($event)"
+    alt=" {{ currentSong.name }} image"
+    class="song-image"
+  />
+  <div class="song-details">
+    <h3 (click)="goToPlayer($event)">{{ currentSong.name }}</h3>
+    <p>{{ currentSong.artist }} - {{ currentSong.year }}</p>
+  </div>
+
+  <mat-slider
+    min="0"
+    [max]="duration"
+    step="1"
+    (change)="onSliderChange($event)"
+    (mouseover)="onSliderHover($event)"
+    (mouseout)="onSliderLeave()"
+  >
+    <input matSliderThumb [value]="currentTime" />
+  </mat-slider>
+
+  <div
+    *ngIf="isHovering"
+    class="hover-time"
+    [style.left.px]="hoverTimePosition"
+  >
+    {{ getHoveredTime() }}
+  </div>
+
+  <div class="time-info">
+    <span>{{ getCurrentTime() }}</span> /
+    <span>{{ getFormattedTime(duration) }}</span>
+  </div>
+
+  <mat-toolbar class="operating" color="primary">
+    <button mat-icon-button (click)="skipPrevious()">
+      <mat-icon>skip_previous</mat-icon>
+    </button>
+    <button mat-icon-button class="pause" (click)="playPause()">
+      <mat-icon>{{ isPlaying ? "pause" : "play_arrow" }}</mat-icon>
+    </button>
+    <button mat-icon-button (click)="skipNext()">
+      <mat-icon>skip_next</mat-icon>
+    </button>
+    <span class="spacer"></span>
+    <button mat-icon-button class="volume" (click)="toggleMute()">
+      <mat-icon>{{ isMuted ? "volume_off" : "volume_up" }}</mat-icon>
+    </button>
+    <button mat-icon-button class="close-btn" (click)="closeInfoBar()">
+      <mat-icon>cancel</mat-icon>
+    </button>
+    <button mat-icon-button class="zoom-button" (click)="goToPlayer($event)">
+      <mat-icon>fullscreen</mat-icon>
+    </button>
+  </mat-toolbar>
+</div>
+
+
+<mat-card-header class="title">
+  <mat-card-title>Playlist</mat-card-title>
+</mat-card-header>
+
+<!-- Playlist cards -->
+<div class="home-container" #playlistSection>
+  <mat-card
+    class="playlist-card"
+    *ngFor="let playlist of playlists"
+    [routerLink]="['/playlist', playlist.name]"
+  >
+    <mat-card-header>
+      <mat-card-title>{{ playlist.name }}</mat-card-title>
+    </mat-card-header>
+    <img
+      mat-card-image
+      [src]="playlist.imageUrl"
+      alt="{{ playlist.name }} image"
+    />
+    <mat-card-actions>
+      <button mat-button>View Playlist</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
